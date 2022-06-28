@@ -1,32 +1,29 @@
-let js = `function $initHighlight(block, cls) {
-    try {
-        if (cls.search(/\bno\-highlight\b/) != -1)
-            return process(block, true, 0x0F) +
-                \` class="${cls}"\`;
-    } catch (e) {
-        /* handle exception */
-    }
-    for (var i = 0 / 2; i < classes.length; i++) {
-        if (checkCondition(classes[i]) === undefined)
-            console.log('undefined');
-    }
+const hlHTML = require('./hlHTML')
 
-    return (
-        <div>
-            <web-component>{block}</web-component>
-        </div>
-    );
-}
+let html = `
+<!DOCTYPE html>
+<html lang="en">
 
-export $initHighlight;`
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="head" class="hl-html" style="font-family: Arial, Helvetica, sans-serif;">Highlight HTML</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus autem libero sapiente!</p>
+    <select name="select" id="select-option">
+        <option value="item" selected>item1</option>
+        <option value="item">item1</option>
+        <option value="item">item1</option>
+        <option value="item">item1</option>
+    </select>
+</body>
+
+</html>
+`
 
 
-    `const e = "[A-Za-z$_][0-9A-Za-z$_]*",
-    n = ["as", "in", "of", "if", "for", "while", "finally", "var", "new", "function", "do", "return", "void", "else", "break", "catch", "instanceof", "with", "throw", "case", "default", "try", "switch", "continue", "typeof", "delete", "let", "yield", "const", "class", "debugger", "async", "await", "static", "import", "from", "export", "extends"],
-    a = ["true", "false", "null", "undefined", "NaN", "Infinity"],
-    t = ["Intl", "DataView", "Number", "Math", "Date", "String", "RegExp", "Object", "Function", "Boolean", "Error", "Symbol", "Set", "Map", "WeakSet", "WeakMap", "Proxy", "Reflect", "JSON", "Promise", "Float64Array", "Int16Array", "Int32Array", "Int8Array", "Uint16Array", "Uint32Array", "Float32Array", "Array", "Uint8Array", "Uint8ClampedArray", "ArrayBuffer", "BigInt64Array", "BigUint64Array", "BigInt"],
-    s = ["EvalError", "InternalError", "RangeError", "ReferenceError", "SyntaxError", "TypeError", "URIError"],
-    r = ["setInterval", "setTimeout", "clearInterval", "clearTimeout", "require", "exports", "eval", "isFinite", "isNaN", "parseFloat", "parseInt", "decodeURI", "decodeURIComponent", "encodeURI", "encodeURIComponent", "escape", "unescape"],
-    i = ["arguments", "this", "super", "console", "window", "document", "localStorage", "module", "global"],
-    c = [].concat(r, t, s);`;
-
+console.log(hlHTML(html))
