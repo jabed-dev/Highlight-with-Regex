@@ -9,7 +9,7 @@ function hlHTML(html) {
 
     const tagRegex = /&lt;.+?&gt;/gs
         , tagNameRegex = /(?<=&lt;\/?\s*)[\w-]+/g
-        , tagBlockRegex = /(<)|(>)/g
+        , tagBlockRegex = /(?<lt>\<)|(?<gt>\>)/g
         , metaTagRegex = /&lt;!.+?&gt;/g
         , attrsRegex = /(?<=&lt;\/?[\w-]+\s+)\w+.*?(?=\s*\/?&gt;)/gs
         , attrNameRegex = /[\w-]+/g
@@ -17,7 +17,6 @@ function hlHTML(html) {
         , commentRegex = /&lt;!--[^]*?--&gt;/g
         , styleRegex = /(?<=<style.*?>)[^]+?(?=<\/style\s*>)/gs
         , scriptRegex = /(?<=<script.*?>)[^]+?(?=<\/script\s*>)/gs;
-
 
     const metaTagFlag = '{!$}'
         , commentFlag = '{$!}'
@@ -29,7 +28,7 @@ function hlHTML(html) {
         , comments = []
         , styles = []
         , scripts = []
-        , attrString;
+        , attrString = [];
 
 
     // style get
@@ -64,7 +63,7 @@ function hlHTML(html) {
         // attributes get
         tag = tag.replace(attrsRegex, (attr) => {
             attr = attr.replace(attrStrRegex, (attrStr) => {
-                attrString = attrStr;
+                attrString.push(attrStr);
                 return attrStrFlag;
             });
             // attribute name set
@@ -73,7 +72,7 @@ function hlHTML(html) {
             });
             // attribute value set
             attr = attr.replace(/{\$=}/g, () => {
-                return setClass('string', attrString);
+                return setClass('string', attrString.shift());
             });
 
             return attr;
